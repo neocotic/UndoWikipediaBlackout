@@ -7,9 +7,10 @@
 # Private constants
 # -----------------
 
-# Dates for known blackouts on Wikipedia.
+# Date ranges for known blackouts on Wikipedia.
 BLACKOUTS        = [
-  new Date 2012, 0, 18
+  start: new Date 2012, 0, 17, 0,  0,  0,  0
+  end:   new Date 2012, 0, 19, 23, 59, 59, 999
 ]
 # Extension ID being used by Undo Wikipedia Blackout.
 EXTENSION_ID     = utils.i18n '@@extension_id'
@@ -44,14 +45,11 @@ executeScriptsInExistingWindows = ->
           if tab.url.indexOf(HOMEPAGE_DOMAIN) isnt -1
             chrome.tabs.executeScript tab.id, file: 'lib/install.js'
 
-# Determine whether or not today is a known blackout day for Wikipedia.
+# Determine whether or not today falls within a known blackout for Wikipedia.
 isBlackoutToday = ->
   today = new Date()
-  for date in BLACKOUTS
-    if today.getDate()     is date.getDate() and
-       today.getMonth()    is date.getMonth() and
-       today.getFullYear() is date.getFullYear()
-      return yes
+  for range in BLACKOUTS
+    return yes if today >= range.start and today <= range.end
   no
 
 # Listener for internal requests to Undo Wikipedia Blackout.
