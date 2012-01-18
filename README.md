@@ -21,5 +21,5 @@ please visit the project's homepage;
 http://neocotic.com/UndoWikipediaBlackout
 
 [@neocotic]: https://twitter.com/#!/neocotic
-[undo wikipedia blackout]: http://neocotic.com/UndoWikipediaBlackout
+[undo wikipedia blackout]: https://chrome.google.com/webstore/detail/gbgogigdaibinioohdhejplmajgkkfdn
 [wikipedia]: http://www.wikipedia.org
