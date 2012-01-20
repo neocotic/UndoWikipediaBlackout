@@ -21,14 +21,12 @@ chrome.extension.sendRequest type: 'info', (data) ->
       'mw-panel'
       'footer'
     ]
-    # Attempt to hide the overlay before it even appears and ensure the core
-    # known elements are not hidden by the blackout code.
-    for id in ids
-      element = document.getElementById id
-      css    += "##{id} {display: block !important;}" if element
-    element = document.createElement 'style'
-    element.type = 'text/css'
-    element.innerText = css
-    document.head.appendChild element
+    # Add CSS to ensure each identified element is displayed.
+    css += "##{id} {display: block !important;}" for id in ids
+    # Create style element to contain the CSS and attach it to the document.
+    style = document.createElement 'style'
+    style.type = 'text/css'
+    style.innerText = css
+    document.head.appendChild style
     # Tell the background page to show the page action now.
     chrome.extension.sendRequest type: 'show'

@@ -48,8 +48,7 @@ executeScriptsInExistingWindows = ->
 # Determine whether or not today falls within a known blackout for Wikipedia.
 isBlackoutToday = ->
   today = new Date()
-  for range in BLACKOUTS
-    return yes if today >= range.start and today <= range.end
+  return yes for range in BLACKOUTS when range.start <= today <= range.end
   no
 
 # Listener for internal requests to Undo Wikipedia Blackout.
