@@ -4,205 +4,170 @@
 # For all details and documentation:  
 # <http://neocotic.com/UndoWikipediaBlackout>
 
+# Private classes
+# ---------------
+
+# `Class` makes for more readable logs etc. as it overrides `toString` to
+# output the name of the implementing class.
+class Class
+
+  # Override the default `toString` implementation to provide a cleaner output.
+  toString: -> @constructor.name
+
 # Private variables
 # -----------------
 
-# Mapping for internationalization handlers.  
-# Each handler represents an attribute (based on the property name) and is
-# called for each attribute found in the current `document`.
-i18nHandlers   =
-
-  # Replace the HTML content of `element` with the message looked up for
-  # `value`.
-  'i18n-content': (element, value, subMap) ->
-    subs = i18nSubs element, value, subMap
-    element.innerHTML = utils.i18n value, subs
-
-  # Replace the value of the properties and/or attributes of `element` with the
-  # messages looked up for their corresponding values.
-  'i18n-values':  (element, value, subMap) ->
-    subs  = i18nSubs element, value, subMap
-    parts = value.replace(/\s/g, '').split ';'
-    for part in parts
-      prop = part.match /^([^:]+):(.+)$/
-      if prop
-        propName = prop[1]
-        propExpr = prop[2]
-        if propName.indexOf('.') is 0
-          path = propName.slice(1).split '.'
-          obj = element
-          obj = obj[path.shift()] while obj and path.length > 1
-          if obj
-            obj[path] = utils.i18n value, subs
-            i18nProcess element, subMap if path is 'innerHTML'
-        else
-          element.setAttribute propName, utils.i18n propExpr, subs
-# List of internationalization attributes/handlers available.
-i18nAttributes = []
-i18nAttributes.push key for key of i18nHandlers
-# Selector containing the available internationalization attributes/handlers
-# which is used by `i18nProcess` to query all elements.
-i18nSelector   = "[#{i18nAttributes.join '],['}]"
-
-# Private functions
-# -----------------
-
-# Find all elements to be internationalized and call their corresponding
-# handler(s).
-i18nProcess = (node, subMap) ->
-  for element in node.querySelectorAll i18nSelector
-    for name in i18nAttributes
-      attribute = element.getAttribute name
-      i18nHandlers[name] element, attribute, subMap if attribute?
-
-# Find an array of substitution strings using the element's ID and the message
-# key as the mapping.
-i18nSubs = (element, value, subMap) ->
-  if subMap
-    for prop of subMap when subMap.hasOwnProperty(prop) and prop is element.id
-      for subProp of subMap[prop] when subMap[prop].hasOwnProperty subProp
-        if subProp is value
-          subs = subMap[prop][subProp]
-          break
-      break
-  return subs
+# Mapping of all timers currently being managed.
+timings = {}
 
 # Utilities setup
 # ---------------
 
-utils = window.utils =
+utils = window.utils = new class Utils extends Class
 
   # Public functions
   # ----------------
 
+  # Call a function asynchronously with the arguments provided and then pass
+  # the returned value to `callback` if it was specified.
+  async: (fn, args..., callback) ->
+    if callback? and typeof callback isnt 'function'
+      args.push callback
+      callback = null
+    setTimeout ->
+      result = fn args...
+      callback? result
+    , 0
+
+  # Generate a unique key based on the current time and using a randomly
+  # generated hexadecimal number of the specified length.
+  keyGen: (separator = '.', length = 5, prefix = '', upperCase = yes) ->
+    parts = []
+    # Populate the segment(s) to attempt uniquity.
+    parts.push new Date().getTime()
+    if length > 0
+      min = @repeat '1', '0', if length is 1 then 1 else length - 1
+      max = @repeat 'f', 'f', if length is 1 then 1 else length - 1
+      min = parseInt min, 16
+      max = parseInt max, 16
+      parts.push @random min, max
+    # Convert segments to their hexadecimal (base 16) forms.
+    parts[i] = part.toString 16 for part, i in parts
+    # Join all segments using `separator` and append to the `prefix` before
+    # potentially transforming it to upper case.
+    key = prefix + parts.join separator
+    if upperCase then key.toUpperCase() else key.toLowerCase()
+
   # Retrieve the first entity/all entities that pass the specified `filter`.
   query: (entities, singular, filter) ->
-    if singular
-      return entity for entity in entities when filter entity
+    return entity for entity in entities when filter entity if singular
+    entity for entity in entities when filter entity
+
+  # Generate a random number between the `min` and `max` values provided.
+  random: (min, max) -> Math.floor(Math.random() * (max - min + 1)) + min
+
+  # Repeat the string provided the specified number of times.
+  repeat: (str = '', repeatStr = str, count = 1) ->
+    if count isnt 0
+      # Repeat to the right if `count` is positive.
+      str += repeatStr for i in [1..count] if count > 0
+      # Repeat to the left if `count` is negative.
+      str = repeatStr + str for i in [1..count*-1] if count < 0
+    str
+
+  # Start a new timer for the specified `key`.  
+  # If a timer already exists for `key`, return the time difference in
+  # milliseconds.
+  time: (key) ->
+    if timings.hasOwnProperty key
+      new Date().getTime() - timings[key]
     else
-      results = []
-      results.push entity for entity in entities when filter entity
-      return results
+      timings[key] = new Date().getTime()
 
-  # Data functions
-  # --------------
-
-  # Determine whether or not the specified key exists in `localStorage`.
-  exists: (key) ->
-    return localStorage.hasOwnProperty key
-
-  # Retrieve the value associated with the specified key from `localStorage`.  
-  # If the value is found, parse it as JSON before being returning it;
-  # otherwise return `undefined`.
-  get: (key) ->
-    value = localStorage[key]
-    return if value? then JSON.parse value else value
-
-  # Initialize the value of the specified key in `localStorage`.  
-  # If the value is currently `undefined`, assign the specified default value;
-  # otherwise reassign itself.
-  init: (key, defaultValue) ->
-    value = utils.get key
-    return utils.set key, value ? defaultValue
-
-  # Remove the specified key from `localStorage`.
-  remove: (key) ->
-    value = utils.get key
-    delete localStorage[key]
-    return value
-
-  # Copy the value of the existing key to that of the new key then remove the
-  # old key from `localStorage`.  
-  # If the old key doesn't exist in `localStorage`, assign the specified
-  # default value to it instead.
-  rename: (oldKey, newKey, defaultValue) ->
-    if utils.exists oldKey
-      utils.init newKey, utils.get oldKey
-      utils.remove oldKey
+  # End the timer for the specified `key` and return the time difference in
+  # milliseconds and remove the timer.  
+  # If no timer exists for `key`, simply return `0'.
+  timeEnd: (key) ->
+    if timings.hasOwnProperty key
+      start = timings[key]
+      delete timings[key]
+      new Date().getTime() - start
     else
-      utils.init newKey, defaultValue
+      0
 
-  # Set the value of the specified key in `localStorage`.  
-  # If the specified value is `undefined`, assign that value directly to the
-  # key; otherwise transform it to a JSON string beforehand.
-  set: (key, value) ->
-    oldValue = utils.get key
-    localStorage[key] = if value? then JSON.stringify value else value
-    return oldValue
+  # Convenient shorthand for `chrome.extension.getURL`.
+  url: -> chrome.extension.getURL arguments...
 
-  # Internationalization functions
-  # ------------------------------
+# Public classes
+# --------------
 
-  # Convenient shorthand for `chrome.i18n.getMessage`.
-  i18n: ->
-    chrome.i18n.getMessage arguments...
+# Objects within the extension should extend this class wherever possible.
+utils.Class = Class
 
-  # Internationalize the specified attribute of all the selected elements.
-  i18nAttribute: (selector, attribute, value, subs) ->
-    elements = document.querySelectorAll selector
-    # Ensure the substitution string(s) are in an array.
-    subs = [subs] if typeof subs is 'string'
-    for element in elements
-      element.setAttribute attribute, utils.i18n value, subs
+# `Runner` allows asynchronous code to be executed dependently in an
+# organized manner.
+class utils.Runner extends utils.Class
 
-  # Internationalize the contents of all the selected elements.
-  i18nContent: (selector, value, subs) ->
-    elements = document.querySelectorAll selector
-    # Ensure the substitution string(s) are in an array.
-    subs = [subs] if typeof subs is 'string'
-    element.innerHTML = utils.i18n value, subs for element in elements
+  # Create a new instance of `Runner`.
+  constructor: -> @queue = []
 
-  # Perform all internationalization setup required for the current page.
-  i18nSetup: (subMap) ->
-    i18nProcess document, subMap
+  # Finalize the process by resetting this `Runner` an then calling `onfinish`,
+  # if it was specified when `run` was called.  
+  # Any arguments passed in should also be passed to the registered `onfinish`
+  # handler.
+  finish: (args...) ->
+    @queue = []
+    @started = no
+    @onfinish? args...
 
-  # Log functions
-  # -------------
+  # Remove the next task from the queue and call it.  
+  # Finish up if there are no more tasks in the queue, ensuring any `args` are
+  # passed along to `onfinish`.
+  next: (args...) ->
+    if @started
+      if @queue.length
+        ctx = fn = null
+        task = @queue.shift()
+        # Determine what context the function should be executed in.
+        switch typeof task.reference
+          when 'function' then fn = task.reference
+          when 'string'
+            ctx = task.context
+            fn  = ctx[task.reference]
+        # Unpack the arguments where required.
+        if typeof task.args is 'function'
+          task.args = task.args.apply null
+        fn?.apply ctx, task.args
+        return yes
+      else
+        @finish args...
+    no
 
-  # Output all failed `assertions`.
-  assert: (assertions...) ->
-    console.assert assertion for assertion in assertions if utils.logging()
+  # Add a new task to the queue using the values provided.  
+  # `reference` can either be the name of the property on the `context` object
+  # which references the target function or the function itself. When the
+  # latter, `context` is ignored and should be `null` (not omitted). All of the
+  # remaining `args` are passed to the function when it is called during the
+  # process.
+  push: (context, reference, args...) -> @queue.push
+    args:      args
+    context:   context
+    reference: reference
 
-  # Create/increment a counter and output its current count for all `names`.
-  count: (names...) ->
-    console.count name for name in names if utils.logging()
+  # Add a new task to the queue using the *packed* values provided.  
+  # This method varies from `push` since the arguments are provided in the form
+  # of a function which is called immediately before the function, which allows
+  # any dependent arguments to be correctly referenced.
+  pushPacked: (context, reference, packedArgs) -> @queue.push
+    args:      packedArgs
+    context:   context
+    reference: reference
 
-  # Output all debug `entries`.
-  debug: (entries...) ->
-    console.debug entry for entry in entries if utils.logging()
+  # Start the process by calling the first task in the queue and register the
+  # `onfinish` function provided.
+  run: (@onfinish) ->
+    @started = yes
+    @next()
 
-  # Display an interactive listing of the properties of all `entries`.
-  dir: (entries...) ->
-    console.dir entry for entry in entries if utils.logging()
-
-  # Output all error `entries`.
-  error: (entries...) ->
-    console.error entry for entry in entries if utils.logging()
-
-  # Output all informative `entries`.
-  info: (entries...) ->
-    console.info entry for entry in entries if utils.logging()
-
-  # Output all general `entries`.
-  log: (entries...) ->
-    console.log entry for entry in entries if utils.logging()
-
-  # Indicates whether or not logging is enabled.
-  logging: ->
-    utils.get 'log'
-
-  # Start a timer for all `names`.
-  time: (names...) ->
-    console.time name for name in names if utils.logging()
-
-  # Stop a timer and output its elapsed time in milliseconds for all `names`.
-  timeEnd: (names...) ->
-    console.timeEnd name for name in names if utils.logging()
-
-  # Output a stack trace.
-  trace: ->
-    console.trace() if utils.logging()
-
-  # Output all warning `entries`.
-  warn: (entries...) ->
-    console.warn entry for entry in entries if utils.logging()
+  # Remove the specified number of tasks from the front of the queue.
+  skip: (count = 1) -> @queue.splice 0, count

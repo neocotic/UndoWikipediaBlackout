@@ -11,14 +11,9 @@
 # order to get the ID in use.
 chrome.extension.sendRequest type: 'info', (data) ->
   # Names of the classes to be removed from the targeted elements.
-  classes = [
-    'chrome_install_button'
-    'primary'
-  ]
-  # "Install" links to be modified.
-  links   = document.querySelectorAll "a.#{classes[0]}[href$=#{data.id}]"
+  classes = ['chrome_install_button', 'btn-primary', 'primary']
   # Disable all "Install" links on the homepage for Undo Wikipedia Blackout.
-  for link in links
-    link.className += ' disabled'
+  for link in document.querySelectorAll "a.#{classes[0]}[href$=#{data.id}]"
     link.innerText  = 'Installed'
-    link.className  = link.className.replace cls, '' for cls in classes
+    link.classList.add 'disabled'
+    link.classList.remove cls for cls in classes

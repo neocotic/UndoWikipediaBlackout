@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title i18n-content="name"></title>
+    <link rel="stylesheet" href="../vendor/bootstrap.min.css">
+    <style type="text/css">
+      body {padding-top: 60px; padding-bottom: 10px;}
+      a {cursor: pointer;}
+      .left {text-align: left;}
+      .center {text-align: center;}
+      .right {text-align: right;}
+      .top {vertical-align: top;}
+      .middle {vertical-align: middle;}
+      .bottom {vertical-align: bottom;}
+      .navbar-fixed-top .brand {padding-right: 0; padding-left: 0; margin-left: 20px; float: right; font-weight: bold; color: black; text-shadow: 0 1px 0 rgba(255, 255, 255, .1), 0 0 30px rgba(255, 255, 255, .125); -webkit-transition: all .2s linear; -moz-transition: all .2s linear; transition: all .2s linear;}
+      .form-vertical .control-group > label, .control-label {padding-top: 6px;}
+      .modal-footer input[type="file"] {float: right; margin-left: 5px; margin-bottom: 0;}
+      .input-prepend, .input-append {margin-bottom: 0;}
+      pre {overflow: auto; white-space: pre;}
+      input[type="file"]::-webkit-file-upload-button {display: inline-block; padding: 4px 10px 4px; font-size: 13px; line-height: 18px; color: #333333; text-align: center; text-shadow: 0 1px 1px rgba(255, 255, 255, 0.75); background-color: #fafafa; background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#ffffff), color-stop(25%, #ffffff), to(#e6e6e6)); background-image: -webkit-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6); background-image: -moz-linear-gradient(top, #ffffff, #ffffff 25%, #e6e6e6); background-image: -ms-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6); background-image: -o-linear-gradient(#ffffff, #ffffff 25%, #e6e6e6); background-image: linear-gradient(#ffffff, #ffffff 25%, #e6e6e6); background-repeat: no-repeat; filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffffff', endColorstr='#e6e6e6', GradientType=0); border: 1px solid #ccc; border-bottom-color: #bbb; -webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px; -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),0 1px 2px rgba(0, 0, 0, 0.05); -moz-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),0 1px 2px rgba(0, 0, 0, 0.05); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2),0 1px 2px rgba(0, 0, 0, 0.05); cursor: pointer; *margin-left: .3em;}
+      input[type="file"]:first-child::-webkit-file-upload-button {*margin-left: 0;}
+      input[type="file"]::-webkit-file-upload-button:hover {color: #333333; text-decoration: none; background-color: #e6e6e6; background-position: 0 -15px; -webkit-transition: background-position 0.1s linear; -moz-transition: background-position 0.1s linear; -ms-transition: background-position 0.1s linear; -o-transition: background-position 0.1s linear; transition: background-position 0.1s linear;}
+      input[type="file"]::-webkit-file-upload-button:focus {outline: thin dotted; outline: 5px auto -webkit-focus-ring-color; outline-offset: -2px;}
+      input[type="file"]:disabled::-webkit-file-upload-button {cursor: efault; background-image: none; background-color: #e6e6e6; opacity: 0.65; filter:alpha(opacity=65); -webkit-box-shadow: none; -moz-box-shadow: none; box-shadow: none;}
+      td > .label, th > .label {padding-bottom: 0;}
+      .popover-content > p > p {margin-bottom: 5px;}
+      .popover-content > p > p:last-child {margin-bottom: 0;}
+      .popover-inner {text-align: left;}
+      .help {cursor: help;}
+      .tight {margin: 0;}
+      .tight-top {margin-top: 0;}
+      .tight-right {margin-right: 0;}
+      .tight-bottom {margin-bottom: 0;}
+      .tight-left {margin-left: 0;}
+      @media (max-width: 768px) {
+        body {padding-top: 0;}
+      }
+      @media (min-width: 768px) and (max-width: 980px) {
+        body {padding-top: 0;}
+      }
+    </style>
+    <script src="../vendor/jquery.min.js"></script>
+    <script src="../vendor/bootstrap.min.js"></script>
+    <script src="../lib/utils.js"></script>
+    <script src="../lib/store.js"></script>
+    <script src="../lib/i18n.js"></script>
+    <script src="../lib/log.js"></script>
+    <script src="../lib/analytics.js"></script>
+    <script src="../lib/options.js"></script>
+    <script type="application/javascript">
+      $(function () {
+        options.init();
+      });
+    </script>
+  </head>
+  <body id="top">
+    <div class="navbar navbar-fixed-top">
+      <div class="navbar-inner">
+        <div class="container">
+          <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </a>
+          <span class="brand" i18n-content="name"></span>
+          <div class="nav-collapse">
+            <ul id="navigation" class="nav">
+              <li><a id="general_nav" tabify="#general_tab" i18n-content="opt_general_header"></a></li>
+              <li><a id="tools_nav" data-placement="bottom" i18n-values="title:opt_tools_header"><i class="icon-cog icon-white"></i></a></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container">
+      <div id="general_tab" class="tab">
+        <div class="row">
+          <div class="span12">
+            <form class="form-horizontal">
+              <fieldset>
+                <legend i18n-content="opt_misc_header"></legend>
+                <div class="control-group">
+                  <label class="control-label" for="analytics" i18n-content="opt_analytics_label"></label>
+                  <div class="controls">
+                    <label class="checkbox span5 tight-left">
+                      <input type="checkbox" id="analytics">
+                      <span i18n-content="opt_analytics_text"></span>
+                      <p class="help-block" i18n-content="opt_analytics_sub_text"></p>
+                    </label>
+                  </div>
+                </div>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+      </div>
+      <hr>
+      <footer class="footer">
+        <p class="pull-right"><a data-goto="top" i18n-content="opt_top_button"></a></p>
+        <p id="footer" i18n-content="opt_footer"></p>
+      </footer>
+      <div id="tools_wizard" class="hide modal">
+        <div class="modal-header">
+          <a class="close" data-dismiss="modal">&times;</a>
+          <h3 i18n-content="opt_tools_header"></h3>
+        </div>
+        <div class="modal-body">
+          <form class="form-horizontal">
+            <p i18n-content="opt_tools_text"></p>
+            <fieldset>
+              <legend>
+                <span i18n-content="opt_logger_header"></span>
+                <a class="help" popover="opt_logger_help" i18n-values="title:opt_logger_header" style="font-size: 13px; line-height: 18px"><i class="icon-question-sign"></i></a>
+              </legend>
+              <div class="control-group">
+                <label class="control-label" for="loggerEnabled" i18n-content="opt_logger_enabled_label"></label>
+                <div class="controls">
+                  <label class="checkbox span3 tight-left">
+                    <input type="checkbox" id="loggerEnabled">
+                    <span i18n-content="opt_logger_enabled_text"></span>
+                  </label>
+                </div>
+              </div>
+              <div class="control-group">
+                <label class="control-label" for="loggerLevel" i18n-content="opt_logger_level_label"></label>
+                <div class="controls">
+                  <label class="span3 tight-left">
+                    <select id="loggerLevel" size="1"></select>
+                    <p class="tight-bottom" i18n-content="opt_logger_level_text"></p>
+                    <p class="help-block" i18n-content="opt_logger_level_sub_text"></p>
+                  </label>
+                </div>
+              </div>
+            </fieldset>
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger tools_close_btn" i18n-content="opt_wizard_close_button"></button>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
