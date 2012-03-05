@@ -10,19 +10,11 @@
 # Wrap the functionality in a request for Undo Wikipedia Blackout's details in
 # order to determine whether or not today is a known blackout day for
 # Wikipedia.
-chrome.extension.sendRequest type: 'info', (data) ->
-  if data.blackout
-    css = '#mw-sopaOverlay {display: none !important;}'
-    ids = [
-      'mw-page-base'
-      'mw-head-base'
-      'content'
-      'mw-head'
-      'mw-panel'
-      'footer'
-    ]
-    # Add CSS to ensure each identified element is displayed.
-    css += "##{id} {display: block !important;}" for id in ids
+chrome.extension.sendRequest type: 'profiles', (data) ->
+  if data.profiles.length
+    # Generate CSS based on the available profiles.
+    css = ''
+    css += "#{profile.selector} {#{profile.css}} " for profile in data.profiles
     # Create style element to contain the CSS and attach it to the document.
     style = document.createElement 'style'
     style.type = 'text/css'

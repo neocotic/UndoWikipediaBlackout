@@ -9,8 +9,18 @@
 
 # Date ranges for known blackouts on Wikipedia.
 BLACKOUTS         = [
-  start: new Date 2012, 0, 17, 0,  0,  0,  0
-  end:   new Date 2012, 0, 19, 23, 59, 59, 999
+  date:     new Date 2012, 0, 18
+  duration: 1
+  profiles: [
+    selector: '#mw-sopaOverlay'
+    css:      'display: none !important;'
+  ,
+    selector: '#' + [
+      'mw-page-base', 'mw-head-base', 'content'
+      'mw-head',      'mw-panel',     'footer'
+    ].join ', #'
+    css:      'display: block !important;'
+  ]
 ]
 # Extension ID being used by Undo Wikipedia Blackout.
 EXTENSION_ID      = i18n.get '@@extension_id'
@@ -34,6 +44,18 @@ version           = ''
 
 # Private functions
 # -----------------
+
+# Creates start and end dates for `date`.
+createRange = (date, offset = 1) ->
+  log.trace()
+  range =
+    start: new Date date
+    end:   new Date date
+  range.start.setDate range.start.getDate() - offset
+  range.start.setHours 0, 0, 0, 0
+  range.end.setDate range.end.getDate() + offset
+  range.start.setHours 23, 59, 59, 999
+  range
 
 # Inject and execute the `content.coffee` and `install.coffee` scripts within
 # all of the tabs (where valid) of each Chrome window.
@@ -59,24 +81,24 @@ executeScriptsInExistingWindows = ->
     runner.next()
   runner.run()
 
-# Determine whether or not today falls within a known blackout for Wikipedia.
-isBlackoutToday = ->
+# Retrieve the profiles of all known active blackouts for Wikipedia.
+getBlackoutProfiles = ->
   log.trace()
-  today = new Date()
-  return yes for range in BLACKOUTS when range.start <= today <= range.end
-  no
+  profiles = []
+  today    = new Date()
+  for info in BLACKOUTS
+    range = createRange info.date, info.duration
+    profiles.push info.profiles... if range.start <= today <= range.end
+  profiles
 
 # Listener for internal requests to the extension.
 onRequest = (request, sender, sendResponse) ->
   log.trace()
   switch request?.type
     # Send some useful information back to the sender.
-    when 'info'
-      sendResponse?(
-        blackout: isBlackoutToday()
-        id:       EXTENSION_ID
-        version:  version
-      )
+    when 'info' then sendResponse? id: EXTENSION_ID, version: version
+    # Send the profiles for any known active blackouts.
+    when 'profiles' then sendResponse? profiles: getBlackoutProfiles()
     # Show the page action if the request originated from a content script.
     when 'show'
       if sender.tab

@@ -149,6 +149,7 @@ options = window.options = new class Options extends utils.Class
       placement = if placement? then placement.trim().toLowerCase() else 'top'
       $this.tooltip placement: placement
     $('[data-goto]').click ->
-      goto = $ $(this).attr 'data-goto'
+      goto = $(this).attr 'data-goto'
       log.debug "Relocating view to include '#{goto}'"
+      goto = $ goto
       $(window).scrollTop if goto.length then goto.scrollTop() else 0
