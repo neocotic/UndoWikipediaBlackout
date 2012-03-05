@@ -1,4 +1,4 @@
-YYYY.MM.DD, Version 1.1.0
+2012.03.05, Version 1.1.0
 
 * Add Options page
 * Simplify debugging and testing by including a Developer Tools section in the new Options page
