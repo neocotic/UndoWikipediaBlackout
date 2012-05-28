@@ -10,6 +10,7 @@ legend + p {margin-top: 18px; -webkit-margin-top-collapse: separate;}
 .bottom {vertical-align: bottom;}
 .navbar-fixed-top .brand {padding-right: 0; padding-left: 0; margin-left: 20px; float: right; font-weight: bold; color: black; text-shadow: 0 1px 0 rgba(255, 255, 255, .1), 0 0 30px rgba(255, 255, 255, .125); -webkit-transition: all .2s linear; -moz-transition: all .2s linear; transition: all .2s linear;}
 .form-vertical .control-group > label, .control-label {padding-top: 6px;}
+#tools_wizard legend .help {font-size: 13px; line-height: 18px;}
 .modal {z-index: 10050;}
 .modal-backdrop {z-index: 10040;}
 .modal-open .dropdown-menu{z-index: 20050;}
