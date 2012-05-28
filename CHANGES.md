@@ -21,3 +21,8 @@
 2012.01.18, Version 1.0.2
 
 * Only cover days surrounding known blackout dates
+
+[bootstrap]: http://twitter.github.com/bootstrap
+[content security policy]: http://code.google.com/chrome/extensions/contentSecurityPolicy.html
+[jquery]: http://jquery.com
+[manifest version]: http://code.google.com/chrome/extensions/manifestVersion.html
