@@ -1,12 +1,10 @@
 [Undo Wikipedia Blackout][] is a Google Chrome extension that simply removes
 the blackout from [Wikipedia][].
 
-## Bugs
+## Help Desk
 
-If you have any problems with this extension or would like to see the changes
-currently in development you can do so here;
-
-https://github.com/neocotic/UndoWikipediaBlackout/issues
+If you have any problems with this extension or would like give us your feedback
+you can do so on our [Help Desk][].
 
 ## Questions?
 
@@ -21,5 +19,6 @@ please visit the project's homepage;
 http://neocotic.com/UndoWikipediaBlackout
 
 [@neocotic]: https://twitter.com/#!/neocotic
+[help desk]: https://undowikipediablackout.uservoice.com
 [undo wikipedia blackout]: https://chrome.google.com/webstore/detail/gbgogigdaibinioohdhejplmajgkkfdn
 [wikipedia]: http://www.wikipedia.org
