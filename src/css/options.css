@@ -1,0 +1,34 @@
+body {padding-top: 60px; padding-bottom: 10px;}
+a {cursor: pointer;}
+abbr[data-original-title] {cursor: help; border-bottom: 1px dotted #ddd;}
+legend + p {margin-top: 18px; -webkit-margin-top-collapse: separate;}
+.left {text-align: left;}
+.center {text-align: center;}
+.right {text-align: right;}
+.top {vertical-align: top;}
+.middle {vertical-align: middle;}
+.bottom {vertical-align: bottom;}
+.navbar-fixed-top .brand {padding-right: 0; padding-left: 0; margin-left: 20px; float: right; font-weight: bold; color: black; text-shadow: 0 1px 0 rgba(255, 255, 255, .1), 0 0 30px rgba(255, 255, 255, .125); -webkit-transition: all .2s linear; -moz-transition: all .2s linear; transition: all .2s linear;}
+.form-vertical .control-group > label, .control-label {padding-top: 6px;}
+.modal {z-index: 10050;}
+.modal-backdrop {z-index: 10040;}
+.modal-open .dropdown-menu{z-index: 20050;}
+.modal-open .dropdown.open{*z-index: 20050;}
+.modal-open .popover{z-index: 20060;}
+.modal-open .tooltip{z-index: 20070;}
+.input-prepend, .input-append {margin-bottom: 0;}
+pre {overflow: auto; white-space: pre; word-wrap: normal;}
+.label.pull-right, .badge.pull-right {padding-bottom: 1px;}
+.popover-content > p > p {margin-bottom: 5px;}
+.popover-content > p > p:last-child {margin-bottom: 0;}
+.popover-inner {text-align: left;}
+.help {cursor: help;}
+.tight {margin: 0;}
+.tight-top {margin-top: 0;}
+.tight-right {margin-right: 0;}
+.tight-bottom {margin-bottom: 0;}
+.tight-left {margin-left: 0;}
+@media (max-width: 979px) {
+  body {padding-top: 0;}
+  #navigation li:last-child {display: none;}
+}
