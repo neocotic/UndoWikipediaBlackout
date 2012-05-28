@@ -60,11 +60,23 @@ utils = window.utils = new class Utils extends Class
 
   # Retrieve the first entity/all entities that pass the specified `filter`.
   query: (entities, singular, filter) ->
-    return entity for entity in entities when filter entity if singular
-    entity for entity in entities when filter entity
+    if singular
+      return entity for entity in entities when filter entity
+    else
+      entity for entity in entities when filter entity
 
   # Generate a random number between the `min` and `max` values provided.
   random: (min, max) -> Math.floor(Math.random() * (max - min + 1)) + min
+
+  # Bind `handler` to event indicating that the DOM is ready.
+  ready: (context, handler) ->
+    unless handler?
+      handler = context
+      context = window
+    if context.jQuery?
+      context.jQuery handler
+    else
+      context.document.addEventListener 'DOMContentLoaded', handler
 
   # Repeat the string provided the specified number of times.
   repeat: (str = '', repeatStr = str, count = 1) ->

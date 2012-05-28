@@ -4,6 +4,18 @@
 # For all details and documentation:  
 # <http://neocotic.com/UndoWikipediaBlackout>
 
+# Private constants
+# -----------------
+
+# Source URL of the user feedback widget script.
+WIDGET_SOURCE = 'https://widget.uservoice.com/66hVxrEWDUgjuAmIIqPKg.js'
+
+# Private variables
+# -----------------
+
+# Indicate whether or not the user feedback feature has been added to the page.
+feedbackAdded = no
+
 # Load functions
 # --------------
 
@@ -84,6 +96,35 @@ loadSaveEvents = ->
       chrome.extension.getBackgroundPage().analytics.remove()
       store.set 'analytics', no
 
+# Miscellaneous functions
+# -----------------------
+
+# Add the user feedback feature to the page.
+feedback = ->
+  unless feedbackAdded
+    # Temporary workaround for Content Security Policy issues with UserVoice's
+    # use of inline JavaScript.  
+    # This should be removed if/when it's no longer required.
+    uvwDialogClose = $ '#uvw-dialog-close[onclick]'
+    uvwDialogClose.live 'hover', ->
+      $(this).removeAttr 'onclick'
+      uvwDialogClose.die 'hover'
+    $(uvwDialogClose.selector.replace('[onclick]', '')).live 'click', (e) ->
+      UserVoice.hidePopupWidget()
+      e.preventDefault()
+    uvTabLabel = $ '#uvTabLabel[href^="javascript:"]'
+    uvTabLabel.live 'hover', ->
+      $(this).removeAttr 'href'
+      uvTabLabel.die 'hover'
+    # Continue with normal process of loading Widget.
+    window.uvOptions = {}
+    uv = document.createElement 'script'
+    uv.async = 'async'
+    uv.src   = WIDGET_SOURCE
+    script = document.getElementsByTagName('script')[0]
+    script.parentNode.insertBefore uv, script
+    feedbackAdded = yes
+
 # Options page setup
 # ------------------
 
@@ -100,9 +141,11 @@ options = window.options = new class Options extends utils.Class
     log.info 'Initializing the options page'
     # Add support for analytics if the user hasn't opted out.
     analytics.add() if store.get 'analytics'
+    # Add the user feedback feature to the page.
+    feedback()
     # Begin initialization.
-    i18n.init
-      footer: opt_footer: "#{new Date().getFullYear()}"
+    i18n.init()
+    $('.year-repl').html "#{new Date().getFullYear()}"
     # Bind tab selection event to all tabs.
     initialTabChange = yes
     $('a[tabify]').click ->
@@ -149,7 +192,9 @@ options = window.options = new class Options extends utils.Class
       placement = if placement? then placement.trim().toLowerCase() else 'top'
       $this.tooltip placement: placement
     $('[data-goto]').click ->
-      goto = $(this).attr 'data-goto'
-      log.debug "Relocating view to include '#{goto}'"
-      goto = $ goto
-      $(window).scrollTop if goto.length then goto.scrollTop() else 0
+      goto = $ $(this).attr 'data-goto'
+      log.debug "Relocating view to include '#{goto.selector}'"
+      $(window).scrollTop goto.position()?.top or 0
+
+# Initialize `options` when the DOM is ready.
+utils.ready -> options.init()

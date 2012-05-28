@@ -71,11 +71,11 @@ executeScriptsInExistingWindows = ->
         for tab in tabs
           # Only execute blackout removal content scripts for tabs displaying a
           # page on Wikipedia's domain.
-          if tab.url.indexOf(WIKIPEDIA_DOMAIN) isnt -1
+          if WIKIPEDIA_DOMAIN in tab.url
             chrome.tabs.executeScript tab.id, file: 'lib/content.js'
           # Only execute inline installation content script for tabs displaying
           # a page on Undo Wikipedia Blackout's homepage domain.
-          if tab.url.indexOf(HOMEPAGE_DOMAIN) isnt -1
+          if HOMEPAGE_DOMAIN in tab.url
             chrome.tabs.executeScript tab.id, file: 'lib/install.js'
         runner.next()
     runner.next()
@@ -90,6 +90,15 @@ getBlackoutProfiles = ->
     range = createRange info.date, info.duration
     profiles.push info.profiles... if range.start <= today <= range.end
   profiles
+
+# Load JSON-encoded data from the `url` using a GET HTTP request.
+getJSON = (url, callback) ->
+  req = new XMLHttpRequest()
+  req.open 'GET', url, yes
+  req.onreadystatechange = ->
+    if req.readyState is 4 and req.status is 200
+      callback? JSON.parse(req.responseText), req.statusText
+  req.send()
 
 # Listener for internal requests to the extension.
 onRequest = (request, sender, sendResponse) ->
@@ -135,18 +144,21 @@ ext = window.ext = new class Extension extends utils.Class
     log.trace()
     log.info 'Initializing extension controller'
     analytics.add() if store.get 'analytics'
-    # Begin initialization.
-    init_update()
-    # Add listener for internal requests.
-    chrome.extension.onRequest.addListener onRequest
-    # It's nice knowing what version is running.
-    req = new XMLHttpRequest()
-    req.open 'GET', chrome.extension.getURL('manifest.json'), yes
-    req.onreadystatechange = ->
-      if req.readyState is 4
-        version = JSON.parse(req.responseText).version
-        if isNewInstall
-          analytics.track 'Installs', 'New', version, Number isProductionBuild
-        # Execute content scripts now that we know the version.
-        executeScriptsInExistingWindows()
-    req.send()
+    # Create a runner to ensure asynchronous dependencies are met.
+    runner = new utils.Runner()
+    runner.push null, getJSON, utils.url('manifest.json'), (data) ->
+      # It's nice knowing what version is running.
+      version = data.version
+      runner.next()
+    runner.run =>
+      # Begin initialization.
+      init_update()
+      # Add listener for internal requests.
+      chrome.extension.onRequest.addListener onRequest
+      if isNewInstall
+        analytics.track 'Installs', 'New', version, Number isProductionBuild
+      # Execute content scripts now that we know the version.
+      executeScriptsInExistingWindows()
+
+# Initialize `ext` when the DOM is ready.
+utils.ready -> ext.init()

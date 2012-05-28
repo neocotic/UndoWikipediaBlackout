@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="utf-8">
     <title i18n-content="name"></title>
     <link rel="stylesheet" href="../css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/options.css">
@@ -13,11 +13,6 @@
     <script src="../lib/log.js"></script>
     <script src="../lib/analytics.js"></script>
     <script src="../lib/options.js"></script>
-    <script type="application/javascript">
-      $(function () {
-        options.init();
-      });
-    </script>
   </head>
   <body id="top">
     <div class="navbar navbar-fixed-top">
@@ -62,8 +57,8 @@
       </div>
       <hr>
       <footer class="footer">
-        <p class="pull-right"><a data-goto="top" i18n-content="opt_top_button"></a></p>
-        <p id="footer" i18n-content="opt_footer"></p>
+        <p class="pull-right"><a data-goto="#top" i18n-content="opt_top_button"></a></p>
+        <p id="footer">&copy;<span class="year-repl"></span> <a href="http://neocotic.com" target="_blank">Alasdair Mercer</a></p>
       </footer>
       <div id="tools_wizard" class="hide modal">
         <div class="modal-header">
@@ -76,7 +71,7 @@
             <fieldset>
               <legend>
                 <span i18n-content="opt_logger_header"></span>
-                <a class="help" popover="opt_logger_help" i18n-values="title:opt_logger_header" style="font-size: 13px; line-height: 18px"><i class="icon-question-sign"></i></a>
+                <a class="help" popover="opt_logger_help" i18n-values="title:opt_logger_header"><i class="icon-question-sign"></i></a>
               </legend>
               <div class="control-group">
                 <label class="control-label" for="loggerEnabled" i18n-content="opt_logger_enabled_label"></label>
@@ -91,7 +86,7 @@
                 <label class="control-label" for="loggerLevel" i18n-content="opt_logger_level_label"></label>
                 <div class="controls">
                   <label class="span3 tight-left">
-                    <select id="loggerLevel" size="1"></select>
+                    <select id="loggerLevel" class="input-medium" size="1"></select>
                     <p class="tight-bottom" i18n-content="opt_logger_level_text"></p>
                     <p class="help-block" i18n-content="opt_logger_level_sub_text"></p>
                   </label>
@@ -101,7 +96,7 @@
           </form>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-danger tools_close_btn" i18n-content="opt_wizard_close_button"></button>
+          <button class="btn tools_close_btn" i18n-content="opt_wizard_close_button"></button>
         </div>
       </div>
     </div>

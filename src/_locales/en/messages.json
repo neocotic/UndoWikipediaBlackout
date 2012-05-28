@@ -1,117 +1,132 @@
 {
   "description": {
-    "message": "Remove the blackout on Wikipedia"
+    "message": "Remove the blackout on Wikipedia",
+    "description": "Brief description of the extension."
   },
   "name": {
-    "message": "Undo Wikipedia Blackout"
+    "message": "Undo Wikipedia Blackout",
+    "description": "Name of the extension."
   },
   "opt_analytics_label": {
-    "message": "Analytics"
+    "message": "Analytics",
+    "description": "Label for the Analytics field."
   },
   "opt_analytics_sub_text": {
-    "message": "This information is only ever used to help improve user experience and will never be supplied to a 3rd party"
+    "message": "This information is only ever used to help improve user experience and will never be supplied to a 3rd party",
+    "description": "Help text for the Analytics field."
   },
   "opt_analytics_text": {
-    "message": "Send anonymous usage statistics"
-  },
-  "opt_footer": {
-    "message": "&copy;$YEAR$ $O_LINK_1$http://neocotic.com$O_LINK_2$$NAME$$C_LINK$",
-    "placeholders": {
-      "c_link": {
-        "content": "</a>"
-      },
-      "name": {
-        "content": "Alasdair Mercer"
-      },
-      "o_link_1": {
-        "content": "<a href=\""
-      },
-      "o_link_2": {
-        "content": "\" target=\"_blank\">"
-      },
-      "year": {
-        "content": "$1"
-      }
-    }
+    "message": "Send anonymous usage statistics",
+    "description": "Text for the Analytics field."
   },
   "opt_general_header": {
-    "message": "General"
+    "message": "General",
+    "description": "Header of the General tab."
   },
   "opt_logger_enabled_label": {
-    "message": "Enabled"
+    "message": "Enabled",
+    "description": "Label for the Enabled field in the Developer Tools dialog on the Options page under the Logging section."
   },
   "opt_logger_enabled_text": {
-    "message": "Output logs to the JavaScript console"
+    "message": "Output logs to the JavaScript console",
+    "description": "Text for the Enabled field in the Developer Tools dialog on the Options page under the Logging section."
   },
   "opt_logger_header": {
-    "message": "Logging"
+    "message": "Logging",
+    "description": "Header for the Logging section in the Developer Tools dialog on the Options page."
   },
   "opt_logger_help": {
     "message": "$O_PARA$Follow these steps if you would like to view the logs;$C_PARA$$O_LIST$$O_ITEM$Bring up the extensions management page by clicking the wrench icon and choosing $O_BOLD$Tools > Extensions$C_BOLD$$C_ITEM$$O_ITEM$Ensure $O_BOLD$Developer mode$C_BOLD$ is checked in the top right of the page$C_ITEM$$O_ITEM$Expand the listing for $O_BOLD$Undo Wikipedia Blackout$C_BOLD$ and click the $O_BOLD$pages/background.html$C_BOLD$ link$C_ITEM$$O_ITEM$Select the $O_BOLD$Console$C_BOLD$ tab in the new $O_BOLD$Developer Tools$C_BOLD$ window$C_ITEM$$C_LIST$",
+    "description": "Help text for the Logging section in the Developer Tools dialog on the Options page.",
     "placeholders": {
       "c_bold": {
-        "content": "</strong>"
+        "content": "</strong>",
+        "example": "</strong>"
       },
       "c_item": {
-        "content": "</li>"
+        "content": "</li>",
+        "example": "</li>"
       },
       "c_list": {
-        "content": "</ol>"
+        "content": "</ol>",
+        "example": "</ol>"
       },
       "c_para": {
-        "content": "</p>"
+        "content": "</p>",
+        "example": "</p>"
+      },
+      "file": {
+        "content": "<strong>pages/background.html</strong>",
+        "example": "pages/background.html"
       },
       "o_bold": {
-        "content": "<strong>"
+        "content": "<strong>",
+        "example": "<strong>"
       },
       "o_item": {
-        "content": "<li>"
+        "content": "<li>",
+        "example": "<li>"
       },
       "o_list": {
-        "content": "<ol>"
+        "content": "<ol>",
+        "example": "<ol>"
       },
       "o_para": {
-        "content": "<p>"
+        "content": "<p>",
+        "example": "<p>"
       }
     }
   },
   "opt_logger_level_debug_text": {
-    "message": "Debug"
+    "message": "Debug",
+    "description": "Text for the Debug option for the Level field in the Developer Tools dialog on the Options page under the Logging section."
   },
   "opt_logger_level_error_text": {
-    "message": "Error (Highest)"
+    "message": "Error (Highest)",
+    "description": "Text for the Error option for the Level field in the Developer Tools dialog on the Options page under the Logging section."
   },
   "opt_logger_level_information_text": {
-    "message": "Information"
+    "message": "Information",
+    "description": "Text for the Information option for the Level field in the Developer Tools dialog on the Options page under the Logging section."
   },
   "opt_logger_level_label": {
-    "message": "Level"
+    "message": "Level",
+    "description": "Label for the Level field in the Developer Tools dialog on the Options page under the Logging section."
   },
   "opt_logger_level_sub_text": {
-    "message": "Only logs at this level or above will be shown"
+    "message": "Only logs at this level or above will be shown",
+    "description": "Help text for the Level field in the Developer Tools dialog on the Options page under the Logging section."
   },
   "opt_logger_level_text": {
-    "message": "Select the level of logging to be performed"
+    "message": "Select the level of logging to be performed",
+    "description": "Text for the Level field in the Developer Tools dialog on the Options page under the Logging section."
   },
   "opt_logger_level_trace_text": {
-    "message": "Trace (Lowest)"
+    "message": "Trace (Lowest)",
+    "description": "Text for the Trace option for the Level field in the Developer Tools dialog on the Options page under the Logging section."
   },
   "opt_logger_level_warning_text": {
-    "message": "Warning"
+    "message": "Warning",
+    "description": "Text for the Warning option for the Level field in the Developer Tools dialog on the Options page under the Logging section."
   },
   "opt_misc_header": {
-    "message": "Miscellaneous"
+    "message": "Miscellaneous",
+    "description": "Header for the Miscellaneous section on the General tab of the Options page."
   },
   "opt_tools_header": {
-    "message": "Developer Tools"
+    "message": "Developer Tools",
+    "description": "Header for the Developer Tools dialog on the Options page. This is also displayed as a hover text for the cog symbol in the page's navigation."
   },
   "opt_tools_text": {
-    "message": "These settings are normally only used during development but can also be used to create debug information to provide developers with if you're experiencing an issue."
+    "message": "These settings are normally only used during development but can also be used to create debug information to provide developers with if you're experiencing an issue.",
+    "description": "Text for the Developer Tools dialog on the Options page."
   },
   "opt_top_button": {
-    "message": "Back to top"
+    "message": "Back to top",
+    "description": "Text for the link in the footer of the Options page that takes the user to the top of the page."
   },
   "opt_wizard_close_button": {
-    "message": "Close"
+    "message": "Close",
+    "description": "Text for Close buttons commonly found in dialogs."
   }
 }
