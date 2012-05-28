@@ -13,7 +13,7 @@
 chrome.extension.sendRequest type: 'profiles', (data) ->
   if data.profiles.length
     # Generate CSS based on the available profiles.
-    css = ''
+    css  = ''
     css += "#{profile.selector} {#{profile.css}} " for profile in data.profiles
     # Create style element to contain the CSS and attach it to the document.
     style = document.createElement 'style'
