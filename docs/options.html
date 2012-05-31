@@ -4,17 +4,22 @@ Freely distributable under the MIT license. <br />
 For all details and documentation: <br />
 <a href="http://neocotic.com/UndoWikipediaBlackout">http://neocotic.com/UndoWikipediaBlackout</a></p>             </td>             <td class="code">               <div class="highlight"><pre></pre></div>             </td>           </tr>                               <tr id="section-2">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-2">&#182;</a>               </div>               <h2>Private constants</h2>             </td>             <td class="code">               <div class="highlight"><pre>
 
-</pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>Source URL of the user feedback widget script.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+
+</pre></div>             </td>           </tr>                               <tr id="section-3">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-3">&#182;</a>               </div>               <p>Source URL of the user feedback widget script.</p>             </td>             <td class="code">               <div class="highlight"><pre>
 <span class="nv">WIDGET_SOURCE = </span><span class="s1">&#39;https://widget.uservoice.com/66hVxrEWDUgjuAmIIqPKg.js&#39;</span>
 
-</pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <h2>Private variables</h2>             </td>             <td class="code">               <div class="highlight"><pre>
 
-</pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p>Indicate whether or not the user feedback feature has been added to the page.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+</pre></div>             </td>           </tr>                               <tr id="section-4">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-4">&#182;</a>               </div>               <h2>Private variables</h2>             </td>             <td class="code">               <div class="highlight"><pre>
+
+
+</pre></div>             </td>           </tr>                               <tr id="section-5">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-5">&#182;</a>               </div>               <p>Indicate whether or not the user feedback feature has been added to the page.</p>             </td>             <td class="code">               <div class="highlight"><pre>
 <span class="nv">feedbackAdded = </span><span class="kc">no</span>
 
-</pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <h2>Load functions</h2>             </td>             <td class="code">               <div class="highlight"><pre>
 
-</pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <p>Bind an event of the specified <code>type</code> to the elements included by
+</pre></div>             </td>           </tr>                               <tr id="section-6">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-6">&#182;</a>               </div>               <h2>Load functions</h2>             </td>             <td class="code">               <div class="highlight"><pre>
+
+
+</pre></div>             </td>           </tr>                               <tr id="section-7">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-7">&#182;</a>               </div>               <p>Bind an event of the specified <code>type</code> to the elements included by
 <code>selector</code> that, when triggered, modifies the underlying <code>option</code> with the
 value returned by <code>evaluate</code>.</p>             </td>             <td class="code">               <div class="highlight"><pre>
 <span class="nv">bindSaveEvent = </span><span class="nf">(selector, type, option, evaluate, callback) -&gt;</span>
@@ -29,20 +34,23 @@ value returned by <code>evaluate</code>.</p>             </td>             <td c
       <span class="nx">data</span><span class="p">[</span><span class="nx">key</span><span class="p">]</span> <span class="o">=</span> <span class="nv">value = </span><span class="nx">evaluate</span><span class="p">.</span><span class="nx">call</span> <span class="nx">$this</span><span class="p">,</span> <span class="nx">key</span>
     <span class="nx">callback</span><span class="o">?</span> <span class="nx">$this</span><span class="p">,</span> <span class="nx">key</span><span class="p">,</span> <span class="nx">value</span>
 
-</pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <p>Update the options page with the values from the current settings.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+
+</pre></div>             </td>           </tr>                               <tr id="section-8">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-8">&#182;</a>               </div>               <p>Update the options page with the values from the current settings.</p>             </td>             <td class="code">               <div class="highlight"><pre>
 <span class="nv">load = </span><span class="o">-&gt;</span>
   <span class="nx">log</span><span class="p">.</span><span class="nx">trace</span><span class="p">()</span>
   <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#analytics&#39;</span><span class="p">).</span><span class="nx">attr</span> <span class="s1">&#39;checked&#39;</span><span class="p">,</span> <span class="s1">&#39;checked&#39;</span> <span class="k">if</span> <span class="nx">store</span><span class="p">.</span><span class="nx">get</span> <span class="s1">&#39;analytics&#39;</span>
   <span class="nx">loadSaveEvents</span><span class="p">()</span>
   <span class="nx">loadDeveloperTools</span><span class="p">()</span>
 
-</pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <p>Update the developer tools section of the options page with the current
+
+</pre></div>             </td>           </tr>                               <tr id="section-9">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-9">&#182;</a>               </div>               <p>Update the developer tools section of the options page with the current
 settings.</p>             </td>             <td class="code">               <div class="highlight"><pre>
 <span class="nv">loadDeveloperTools = </span><span class="o">-&gt;</span>
   <span class="nx">log</span><span class="p">.</span><span class="nx">trace</span><span class="p">()</span>
   <span class="nx">loadLogger</span><span class="p">()</span>
 
-</pre></div>             </td>           </tr>                               <tr id="section-10">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-10">&#182;</a>               </div>               <p>Update the logging section of the options page with the current settings.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+
+</pre></div>             </td>           </tr>                               <tr id="section-10">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-10">&#182;</a>               </div>               <p>Update the logging section of the options page with the current settings.</p>             </td>             <td class="code">               <div class="highlight"><pre>
 <span class="nv">loadLogger = </span><span class="o">-&gt;</span>
   <span class="nx">log</span><span class="p">.</span><span class="nx">trace</span><span class="p">()</span>
   <span class="nv">logger = </span><span class="nx">store</span><span class="p">.</span><span class="nx">get</span> <span class="s1">&#39;logger&#39;</span>
@@ -55,13 +63,15 @@ settings.</p>             </td>             <td class="code">               <div
       <span class="nv">value: </span><span class="nx">level</span><span class="p">.</span><span class="nx">value</span>
     <span class="nx">option</span><span class="p">.</span><span class="nx">attr</span> <span class="s1">&#39;selected&#39;</span><span class="p">,</span> <span class="s1">&#39;selected&#39;</span> <span class="k">if</span> <span class="nx">level</span><span class="p">.</span><span class="nx">value</span> <span class="o">is</span> <span class="nx">logger</span><span class="p">.</span><span class="nx">level</span>
     <span class="nx">loggerLevel</span><span class="p">.</span><span class="nx">append</span> <span class="nx">option</span>
-</pre></div>             </td>           </tr>                               <tr id="section-11">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-11">&#182;</a>               </div>               <p>Ensure debug level is selected if configuration currently matches none.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+
+</pre></div>             </td>           </tr>                               <tr id="section-11">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-11">&#182;</a>               </div>               <p>Ensure debug level is selected if configuration currently matches none.</p>             </td>             <td class="code">               <div class="highlight"><pre>
   <span class="nx">unless</span> <span class="nx">loggerLevel</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s1">&#39;option[selected]&#39;</span><span class="p">).</span><span class="nx">length</span>
     <span class="nx">loggerLevel</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="s2">&quot;option[value=&#39;#{log.DEBUG}&#39;]&quot;</span><span class="p">).</span><span class="nx">attr</span> <span class="s1">&#39;selected&#39;</span><span class="p">,</span>
       <span class="s1">&#39;selected&#39;</span>
   <span class="nx">loadLoggerSaveEvents</span><span class="p">()</span>
 
-</pre></div>             </td>           </tr>                               <tr id="section-12">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-12">&#182;</a>               </div>               <p>Bind the event handlers required for persisting logging changes.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+
+</pre></div>             </td>           </tr>                               <tr id="section-12">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-12">&#182;</a>               </div>               <p>Bind the event handlers required for persisting logging changes.</p>             </td>             <td class="code">               <div class="highlight"><pre>
 <span class="nv">loadLoggerSaveEvents = </span><span class="o">-&gt;</span>
   <span class="nx">log</span><span class="p">.</span><span class="nx">trace</span><span class="p">()</span>
   <span class="nx">bindSaveEvent</span> <span class="s1">&#39;#loggerEnabled, #loggerLevel&#39;</span><span class="p">,</span> <span class="s1">&#39;change&#39;</span><span class="p">,</span> <span class="s1">&#39;logger&#39;</span><span class="p">,</span> <span class="nf">(key) -&gt;</span>
@@ -74,7 +84,8 @@ settings.</p>             </td>             <td class="code">               <div
     <span class="nx">analytics</span><span class="p">.</span><span class="nx">track</span> <span class="s1">&#39;Logging&#39;</span><span class="p">,</span> <span class="s1">&#39;Changed&#39;</span><span class="p">,</span> <span class="nx">key</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">toUpperCase</span><span class="p">()</span> <span class="o">+</span> <span class="nx">key</span><span class="p">.</span><span class="nx">substr</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
       <span class="nb">Number</span> <span class="nx">value</span>
 
-</pre></div>             </td>           </tr>                               <tr id="section-13">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-13">&#182;</a>               </div>               <p>Bind the event handlers required for persisting general changes.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+
+</pre></div>             </td>           </tr>                               <tr id="section-13">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-13">&#182;</a>               </div>               <p>Bind the event handlers required for persisting general changes.</p>             </td>             <td class="code">               <div class="highlight"><pre>
 <span class="nv">loadSaveEvents = </span><span class="o">-&gt;</span>
   <span class="nx">log</span><span class="p">.</span><span class="nx">trace</span><span class="p">()</span>
   <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#analytics&#39;</span><span class="p">).</span><span class="nx">change</span> <span class="o">-&gt;</span>
@@ -91,12 +102,15 @@ settings.</p>             </td>             <td class="code">               <div
       <span class="nx">chrome</span><span class="p">.</span><span class="nx">extension</span><span class="p">.</span><span class="nx">getBackgroundPage</span><span class="p">().</span><span class="nx">analytics</span><span class="p">.</span><span class="nx">remove</span><span class="p">()</span>
       <span class="nx">store</span><span class="p">.</span><span class="nx">set</span> <span class="s1">&#39;analytics&#39;</span><span class="p">,</span> <span class="kc">no</span>
 
-</pre></div>             </td>           </tr>                               <tr id="section-14">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-14">&#182;</a>               </div>               <h2>Miscellaneous functions</h2>             </td>             <td class="code">               <div class="highlight"><pre>
 
-</pre></div>             </td>           </tr>                               <tr id="section-15">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-15">&#182;</a>               </div>               <p>Add the user feedback feature to the page.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+</pre></div>             </td>           </tr>                               <tr id="section-14">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-14">&#182;</a>               </div>               <h2>Miscellaneous functions</h2>             </td>             <td class="code">               <div class="highlight"><pre>
+
+
+</pre></div>             </td>           </tr>                               <tr id="section-15">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-15">&#182;</a>               </div>               <p>Add the user feedback feature to the page.</p>             </td>             <td class="code">               <div class="highlight"><pre>
 <span class="nv">feedback = </span><span class="o">-&gt;</span>
   <span class="nx">unless</span> <span class="nx">feedbackAdded</span>
-</pre></div>             </td>           </tr>                               <tr id="section-16">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-16">&#182;</a>               </div>               <p>Temporary workaround for Content Security Policy issues with UserVoice's
+
+</pre></div>             </td>           </tr>                               <tr id="section-16">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-16">&#182;</a>               </div>               <p>Temporary workaround for Content Security Policy issues with UserVoice's
 use of inline JavaScript. <br />
 This should be removed if/when it's no longer required.</p>             </td>             <td class="code">               <div class="highlight"><pre>
     <span class="nv">uvwDialogClose = </span><span class="nx">$</span> <span class="s1">&#39;#uvw-dialog-close[onclick]&#39;</span>
@@ -110,7 +124,8 @@ This should be removed if/when it's no longer required.</p>             </td>   
     <span class="nx">uvTabLabel</span><span class="p">.</span><span class="nx">live</span> <span class="s1">&#39;hover&#39;</span><span class="p">,</span> <span class="o">-&gt;</span>
       <span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">removeAttr</span> <span class="s1">&#39;href&#39;</span>
       <span class="nx">uvTabLabel</span><span class="p">.</span><span class="nx">die</span> <span class="s1">&#39;hover&#39;</span>
-</pre></div>             </td>           </tr>                               <tr id="section-17">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-17">&#182;</a>               </div>               <p>Continue with normal process of loading Widget.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+
+</pre></div>             </td>           </tr>                               <tr id="section-17">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-17">&#182;</a>               </div>               <p>Continue with normal process of loading Widget.</p>             </td>             <td class="code">               <div class="highlight"><pre>
     <span class="nb">window</span><span class="p">.</span><span class="nv">uvOptions = </span><span class="p">{}</span>
     <span class="nv">uv = </span><span class="nb">document</span><span class="p">.</span><span class="nx">createElement</span> <span class="s1">&#39;script&#39;</span>
     <span class="nv">uv.async = </span><span class="s1">&#39;async&#39;</span>
@@ -119,26 +134,33 @@ This should be removed if/when it's no longer required.</p>             </td>   
     <span class="nx">script</span><span class="p">.</span><span class="nx">parentNode</span><span class="p">.</span><span class="nx">insertBefore</span> <span class="nx">uv</span><span class="p">,</span> <span class="nx">script</span>
     <span class="nv">feedbackAdded = </span><span class="kc">yes</span>
 
-</pre></div>             </td>           </tr>                               <tr id="section-18">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-18">&#182;</a>               </div>               <h2>Options page setup</h2>             </td>             <td class="code">               <div class="highlight"><pre>
+
+</pre></div>             </td>           </tr>                               <tr id="section-18">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-18">&#182;</a>               </div>               <h2>Options page setup</h2>             </td>             <td class="code">               <div class="highlight"><pre>
 
 <span class="nv">options = </span><span class="nb">window</span><span class="p">.</span><span class="nv">options = </span><span class="k">new</span> <span class="k">class</span> <span class="nx">Options</span> <span class="k">extends</span> <span class="nx">utils</span><span class="p">.</span><span class="nx">Class</span>
 
-</pre></div>             </td>           </tr>                               <tr id="section-19">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-19">&#182;</a>               </div>               <h2>Public functions</h2>             </td>             <td class="code">               <div class="highlight"><pre>
 
-</pre></div>             </td>           </tr>                               <tr id="section-20">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-20">&#182;</a>               </div>               <p>Initialize the options page. <br />
+</pre></div>             </td>           </tr>                               <tr id="section-19">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-19">&#182;</a>               </div>               <h2>Public functions</h2>             </td>             <td class="code">               <div class="highlight"><pre>
+
+
+</pre></div>             </td>           </tr>                               <tr id="section-20">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-20">&#182;</a>               </div>               <p>Initialize the options page. <br />
 This will involve inserting and configuring the UI elements as well as
 loading the current settings.</p>             </td>             <td class="code">               <div class="highlight"><pre>
   <span class="nv">init: </span><span class="o">-&gt;</span>
     <span class="nx">log</span><span class="p">.</span><span class="nx">trace</span><span class="p">()</span>
     <span class="nx">log</span><span class="p">.</span><span class="nx">info</span> <span class="s1">&#39;Initializing the options page&#39;</span>
-</pre></div>             </td>           </tr>                               <tr id="section-21">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-21">&#182;</a>               </div>               <p>Add support for analytics if the user hasn't opted out.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+
+</pre></div>             </td>           </tr>                               <tr id="section-21">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-21">&#182;</a>               </div>               <p>Add support for analytics if the user hasn't opted out.</p>             </td>             <td class="code">               <div class="highlight"><pre>
     <span class="nx">analytics</span><span class="p">.</span><span class="nx">add</span><span class="p">()</span> <span class="k">if</span> <span class="nx">store</span><span class="p">.</span><span class="nx">get</span> <span class="s1">&#39;analytics&#39;</span>
-</pre></div>             </td>           </tr>                               <tr id="section-22">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-22">&#182;</a>               </div>               <p>Add the user feedback feature to the page.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+
+</pre></div>             </td>           </tr>                               <tr id="section-22">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-22">&#182;</a>               </div>               <p>Add the user feedback feature to the page.</p>             </td>             <td class="code">               <div class="highlight"><pre>
     <span class="nx">feedback</span><span class="p">()</span>
-</pre></div>             </td>           </tr>                               <tr id="section-23">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-23">&#182;</a>               </div>               <p>Begin initialization.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+
+</pre></div>             </td>           </tr>                               <tr id="section-23">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-23">&#182;</a>               </div>               <p>Begin initialization.</p>             </td>             <td class="code">               <div class="highlight"><pre>
     <span class="nx">i18n</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
     <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.year-repl&#39;</span><span class="p">).</span><span class="nx">html</span> <span class="s2">&quot;#{new Date().getFullYear()}&quot;</span>
-</pre></div>             </td>           </tr>                               <tr id="section-24">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-24">&#182;</a>               </div>               <p>Bind tab selection event to all tabs.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+
+</pre></div>             </td>           </tr>                               <tr id="section-24">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-24">&#182;</a>               </div>               <p>Bind tab selection event to all tabs.</p>             </td>             <td class="code">               <div class="highlight"><pre>
     <span class="nv">initialTabChange = </span><span class="kc">yes</span>
     <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;a[tabify]&#39;</span><span class="p">).</span><span class="nx">click</span> <span class="o">-&gt;</span>
       <span class="nv">target  = </span><span class="nx">$</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span> <span class="s1">&#39;tabify&#39;</span>
@@ -156,19 +178,29 @@ loading the current settings.</p>             </td>             <td class="code"
           <span class="nx">analytics</span><span class="p">.</span><span class="nx">track</span> <span class="s1">&#39;Tabs&#39;</span><span class="p">,</span> <span class="s1">&#39;Changed&#39;</span><span class="p">,</span> <span class="nx">id</span>
         <span class="nv">initialTabChange = </span><span class="kc">no</span>
         <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">.</span><span class="nx">body</span><span class="p">).</span><span class="nx">scrollTop</span> <span class="mi">0</span>
-</pre></div>             </td>           </tr>                               <tr id="section-25">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-25">&#182;</a>               </div>               <p>Reflect the persisted tab.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+
+</pre></div>             </td>           </tr>                               <tr id="section-25">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-25">&#182;</a>               </div>               <p>Reflect the persisted tab.</p>             </td>             <td class="code">               <div class="highlight"><pre>
     <span class="nx">store</span><span class="p">.</span><span class="nx">init</span> <span class="s1">&#39;options_active_tab&#39;</span><span class="p">,</span> <span class="s1">&#39;general_nav&#39;</span>
     <span class="nv">optionsActiveTab = </span><span class="nx">store</span><span class="p">.</span><span class="nx">get</span> <span class="s1">&#39;options_active_tab&#39;</span>
     <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;##{optionsActiveTab}&quot;</span><span class="p">).</span><span class="nx">click</span><span class="p">()</span>
     <span class="nx">log</span><span class="p">.</span><span class="nx">debug</span> <span class="s2">&quot;Initially displaying tab for #{optionsActiveTab}&quot;</span>
-</pre></div>             </td>           </tr>                               <tr id="section-26">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-26">&#182;</a>               </div>               <p>Bind Developer Tools wizard events to their corresponding elements.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+
+</pre></div>             </td>           </tr>                               <tr id="section-26">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-26">&#182;</a>               </div>               <p>Bind Developer Tools wizard events to their corresponding elements.</p>             </td>             <td class="code">               <div class="highlight"><pre>
     <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#tools_nav&#39;</span><span class="p">).</span><span class="nx">click</span> <span class="o">-&gt;</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#tools_wizard&#39;</span><span class="p">).</span><span class="nx">modal</span> <span class="s1">&#39;show&#39;</span>
     <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.tools_close_btn&#39;</span><span class="p">).</span><span class="nx">click</span> <span class="o">-&gt;</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#tools_wizard&#39;</span><span class="p">).</span><span class="nx">modal</span> <span class="s1">&#39;hide&#39;</span>
-</pre></div>             </td>           </tr>                               <tr id="section-27">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-27">&#182;</a>               </div>               <p>Ensure that form submissions don't reload the page.</p>             </td>             <td class="code">               <div class="highlight"><pre>
-    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;form&#39;</span><span class="p">).</span><span class="nx">submit</span> <span class="o">-&gt;</span> <span class="kc">no</span>
-</pre></div>             </td>           </tr>                               <tr id="section-28">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-28">&#182;</a>               </div>               <p>Load the current option values.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+
+</pre></div>             </td>           </tr>                               <tr id="section-27">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-27">&#182;</a>               </div>               <p>Ensure that form submissions don't reload the page.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;form:not([target=&quot;_blank&quot;])&#39;</span><span class="p">).</span><span class="nx">submit</span> <span class="o">-&gt;</span> <span class="kc">no</span>
+
+</pre></div>             </td>           </tr>                               <tr id="section-28">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-28">&#182;</a>               </div>               <p>Bind analytical tracking events to key footer buttons and links.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;footer a[href*=&quot;neocotic.com&quot;]&#39;</span><span class="p">).</span><span class="nx">click</span> <span class="o">-&gt;</span> <span class="nx">analytics</span><span class="p">.</span><span class="nx">track</span> <span class="s1">&#39;Footer&#39;</span><span class="p">,</span>
+      <span class="s1">&#39;Clicked&#39;</span><span class="p">,</span> <span class="s1">&#39;Homepage&#39;</span>
+    <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#donation&#39;</span><span class="p">).</span><span class="nx">submit</span> <span class="o">-&gt;</span> <span class="nx">analytics</span><span class="p">.</span><span class="nx">track</span> <span class="s1">&#39;Footer&#39;</span><span class="p">,</span> <span class="s1">&#39;Clicked&#39;</span><span class="p">,</span> <span class="s1">&#39;Donate&#39;</span>
+
+</pre></div>             </td>           </tr>                               <tr id="section-29">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-29">&#182;</a>               </div>               <p>Load the current option values.</p>             </td>             <td class="code">               <div class="highlight"><pre>
     <span class="nx">load</span><span class="p">()</span>
-</pre></div>             </td>           </tr>                               <tr id="section-29">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-29">&#182;</a>               </div>               <p>Initialize all popovers, tooltips and <em>go-to</em> links.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+
+</pre></div>             </td>           </tr>                               <tr id="section-30">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-30">&#182;</a>               </div>               <p>Initialize all popovers, tooltips and <em>go-to</em> links.</p>             </td>             <td class="code">               <div class="highlight"><pre>
     <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;[popover]&#39;</span><span class="p">).</span><span class="nx">each</span> <span class="o">-&gt;</span>
       <span class="nv">$this   = </span><span class="nx">$</span> <span class="k">this</span>
       <span class="nv">trigger = </span><span class="nx">$this</span><span class="p">.</span><span class="nx">attr</span> <span class="s1">&#39;data-trigger&#39;</span>
@@ -188,7 +220,8 @@ loading the current settings.</p>             </td>             <td class="code"
       <span class="nx">log</span><span class="p">.</span><span class="nx">debug</span> <span class="s2">&quot;Relocating view to include &#39;#{goto.selector}&#39;&quot;</span>
       <span class="nx">$</span><span class="p">(</span><span class="nb">window</span><span class="p">).</span><span class="nx">scrollTop</span> <span class="nx">goto</span><span class="p">.</span><span class="nx">position</span><span class="p">()</span><span class="o">?</span><span class="p">.</span><span class="nx">top</span> <span class="o">or</span> <span class="mi">0</span>
 
-</pre></div>             </td>           </tr>                               <tr id="section-30">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-30">&#182;</a>               </div>               <p>Initialize <code>options</code> when the DOM is ready.</p>             </td>             <td class="code">               <div class="highlight"><pre>
+
+</pre></div>             </td>           </tr>                               <tr id="section-31">             <td class="docs">               <div class="pilwrap">                 <a class="pilcrow" href="#section-31">&#182;</a>               </div>               <p>Initialize <code>options</code> when the DOM is ready.</p>             </td>             <td class="code">               <div class="highlight"><pre>
 <span class="nx">utils</span><span class="p">.</span><span class="nx">ready</span> <span class="o">-&gt;</span> <span class="nx">options</span><span class="p">.</span><span class="nx">init</span><span class="p">()</span>
 
 </pre></div>             </td>           </tr>                </tbody>     </table>   </div> </body> </html> 

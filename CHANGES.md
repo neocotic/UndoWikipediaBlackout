@@ -1,3 +1,8 @@
+2012.05.31, Version 1.2.1
+
+* [#8](https://github.com/neocotic/UndoWikipediaBlackout/issues/8): Add donation button to footer of Options page
+* [#9](https://github.com/neocotic/UndoWikipediaBlackout/issues/9): Improve inline installation compatibility
+
 2012.05.28, Version 1.2.0
 
 * [#1](https://github.com/neocotic/UndoWikipediaBlackout/issues/1): Update [manifest version][] to 2

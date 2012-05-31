@@ -43,5 +43,5 @@
       , "http://*.neocotic.com/"
       , "*://*.wikipedia.org/*"
     ]
-  , "version": "1.2.0"
+  , "version": "1.2.1"
 }
