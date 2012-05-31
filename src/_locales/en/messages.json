@@ -19,6 +19,20 @@
     "message": "Send anonymous usage statistics",
     "description": "Text for the Analytics field."
   },
+  "opt_donate_button": {
+    "message": "$ICON$ Donate",
+    "description": "Text for the Donate button.",
+    "placeholders": {
+      "icon": {
+        "content": "<i class=\"icon-heart icon-white\"></i>",
+        "example": "<i class=\"icon-heart icon-white\"></i>"
+      }
+    }
+  },
+  "opt_donate_button_title": {
+    "message": "Share the love!",
+    "description": "Hover text for the Donate button."
+  },
   "opt_general_header": {
     "message": "General",
     "description": "Header of the General tab."
